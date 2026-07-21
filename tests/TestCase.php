@@ -27,7 +27,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'BoreiStudio\\FilamentPayPal\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'BoreiStudio\\FilamentPayPal\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
 
         $this->createSettingsTable();
@@ -83,7 +83,7 @@ class TestCase extends Orchestra
 
     private function runPluginMigrations(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->artisan('migrate', ['--force' => true, '--realpath' => true])->run();
     }
 }

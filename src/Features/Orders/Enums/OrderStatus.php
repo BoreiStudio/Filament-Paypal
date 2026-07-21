@@ -6,7 +6,7 @@ use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
-enum OrderStatus: string implements HasLabel, HasColor, HasIcon
+enum OrderStatus: string implements HasColor, HasIcon, HasLabel
 {
     case Created = 'CREATED';
     case Approved = 'APPROVED';
@@ -23,7 +23,7 @@ enum OrderStatus: string implements HasLabel, HasColor, HasIcon
         };
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Created => 'info',

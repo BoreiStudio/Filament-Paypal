@@ -6,7 +6,7 @@ use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
-enum WebhookEventStatus: string implements HasLabel, HasColor, HasIcon
+enum WebhookEventStatus: string implements HasColor, HasIcon, HasLabel
 {
     case Pending = 'pending';
     case Processed = 'processed';
@@ -21,7 +21,7 @@ enum WebhookEventStatus: string implements HasLabel, HasColor, HasIcon
         };
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Pending => 'warning',

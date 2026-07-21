@@ -6,13 +6,14 @@ use BoreiStudio\FilamentPayPal\Features\Orders\Enums\OrderStatus;
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int $account_id
  * @property string $paypal_order_id
  * @property string $intent
- * @property \BoreiStudio\FilamentPayPal\Features\Orders\Enums\OrderStatus $status
+ * @property OrderStatus $status
  * @property string|null $payer_email
  * @property string|null $payer_id
  * @property string|null $payer_name
@@ -26,8 +27,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $approval_url
  * @property \DateTime|null $approved_at
  * @property \DateTime|null $captured_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class Order extends Model
 {

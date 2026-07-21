@@ -18,7 +18,7 @@ class PaymentResource extends Resource
 
     protected static ?string $slug = 'payments';
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::CurrencyDollar;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::CurrencyDollar;
 
     protected static ?int $navigationSort = 2;
 

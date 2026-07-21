@@ -31,14 +31,14 @@ class PayPalStatsWidget extends BaseWidget
             ->count();
 
         return [
-            Stat::make(__('filament-paypal::messages.dashboard.today'), number_format($todayTotal, 2) . ' USD')
+            Stat::make(__('filament-paypal::messages.dashboard.today'), number_format($todayTotal, 2).' USD')
                 ->description(__('filament-paypal::messages.dashboard.today_count', ['count' => $todayCount]))
                 ->descriptionIcon('heroicon-o-currency-dollar')
                 ->color('success'),
-            Stat::make(__('filament-paypal::messages.dashboard.this_week'), number_format($weekTotal, 2) . ' USD')
+            Stat::make(__('filament-paypal::messages.dashboard.this_week'), number_format($weekTotal, 2).' USD')
                 ->descriptionIcon('heroicon-o-calendar')
                 ->color('warning'),
-            Stat::make(__('filament-paypal::messages.dashboard.this_month'), number_format($monthTotal, 2) . ' USD')
+            Stat::make(__('filament-paypal::messages.dashboard.this_month'), number_format($monthTotal, 2).' USD')
                 ->descriptionIcon('heroicon o-chart-bar')
                 ->color('info'),
         ];

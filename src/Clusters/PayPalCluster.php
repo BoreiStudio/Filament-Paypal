@@ -8,11 +8,11 @@ use Filament\Support\Icons\Heroicon;
 
 class PayPalCluster extends Cluster
 {
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::CreditCard;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::CreditCard;
 
     protected static ?int $navigationSort = 1;
 
-    protected static string | \UnitEnum | null $navigationGroup = 'PayPal';
+    protected static string|\UnitEnum|null $navigationGroup = 'PayPal';
 
     public static function getNavigationLabel(): string
     {
@@ -24,7 +24,7 @@ class PayPalCluster extends Cluster
         return SubNavigationPosition::Top;
     }
 
-    public static function setNavigationGroup(string | \UnitEnum | null $group): void
+    public static function setNavigationGroup(string|\UnitEnum|null $group): void
     {
         static::$navigationGroup = $group;
     }

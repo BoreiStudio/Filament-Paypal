@@ -180,7 +180,7 @@ class PayPalSettingsPage extends Page implements HasForms
         $account->save();
     }
 
-    public function getTitle(): string | Htmlable
+    public function getTitle(): string|Htmlable
     {
         return __('filament-paypal::messages.settings.title');
     }

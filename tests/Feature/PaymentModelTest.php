@@ -1,6 +1,5 @@
 <?php
 
-use BoreiStudio\FilamentPayPal\Features\Orders\Models\Order;
 use BoreiStudio\FilamentPayPal\Features\Payments\Models\Payment;
 use BoreiStudio\FilamentPayPal\Features\Refunds\Models\Refund;
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
@@ -72,7 +71,7 @@ it('payment status colors', function () {
     foreach ($cases as $status => $color) {
         $payment = Payment::create([
             'account_id' => $account->id,
-            'paypal_capture_id' => 'CAP-' . $status,
+            'paypal_capture_id' => 'CAP-'.$status,
             'status' => $status,
             'amount' => 10.00,
             'currency_code' => 'USD',

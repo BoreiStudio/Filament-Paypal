@@ -35,7 +35,7 @@ class SyncOrderFromApiAction
                 'payer_email' => $payer['email_address'] ?? null,
                 'payer_id' => $payer['payer_id'] ?? null,
                 'payer_name' => isset($payer['name'])
-                    ? ($payer['name']['given_name'] ?? '') . ' ' . ($payer['name']['surname'] ?? '')
+                    ? ($payer['name']['given_name'] ?? '').' '.($payer['name']['surname'] ?? '')
                     : null,
                 'amount' => $amount['value'] ?? '0',
                 'currency_code' => $amount['currency_code'] ?? 'USD',

@@ -17,7 +17,7 @@ class OrderResource extends Resource
 
     protected static ?string $slug = 'orders';
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::ShoppingCart;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::ShoppingCart;
 
     protected static ?int $navigationSort = 1;
 

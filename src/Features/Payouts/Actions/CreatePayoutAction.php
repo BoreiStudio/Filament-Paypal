@@ -16,15 +16,15 @@ class CreatePayoutAction
     {
         $payoutData = [
             'sender_batch_header' => [
-                'sender_batch_id' => $data['sender_batch_id'] ?? 'BATCH-' . Str::random(20),
+                'sender_batch_id' => $data['sender_batch_id'] ?? 'BATCH-'.Str::random(20),
                 'email_subject' => $data['email_subject'] ?? 'You have a payout!',
             ],
             'items' => [
                 [
                     'recipient_type' => $data['recipient_type'] ?? 'EMAIL',
                     'receiver' => $data['recipient_value'],
-                    'note' => $data['note'] ?? 'Payout from ' . config('app.name'),
-                    'sender_item_id' => $data['sender_item_id'] ?? 'ITEM-' . Str::random(10),
+                    'note' => $data['note'] ?? 'Payout from '.config('app.name'),
+                    'sender_item_id' => $data['sender_item_id'] ?? 'ITEM-'.Str::random(10),
                     'amount' => [
                         'currency' => $data['currency_code'] ?? 'USD',
                         'value' => number_format((float) $data['amount'], 2, '.', ''),

@@ -130,7 +130,7 @@ it('subscription status colors', function () {
         $sub = Subscription::create([
             'account_id' => $account->id,
             'plan_id' => $plan->id,
-            'paypal_subscription_id' => 'SUB-' . $status,
+            'paypal_subscription_id' => 'SUB-'.$status,
             'status' => $status,
         ]);
 

@@ -3,16 +3,16 @@
 namespace BoreiStudio\FilamentPayPal\Features\Orders\Pages;
 
 use BoreiStudio\FilamentPayPal\Clusters\PayPalCluster;
-use BoreiStudio\FilamentPayPal\Features\Orders\Actions\CaptureOrderAction;
 use BoreiStudio\FilamentPayPal\Features\Orders\Actions\CreateOrderAction;
+use BoreiStudio\FilamentPayPal\Features\Orders\Models\Order;
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use Filament\Actions\Action;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
-use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -25,7 +25,7 @@ class OrdersPage extends Page implements HasTable
 
     protected static ?string $cluster = PayPalCluster::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-shopping-cart';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-shopping-cart';
 
     protected static ?int $navigationSort = 1;
 
@@ -39,7 +39,7 @@ class OrdersPage extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(\BoreiStudio\FilamentPayPal\Features\Orders\Models\Order::query())
+            ->query(Order::query())
             ->columns([
                 TextColumn::make('paypal_order_id')
                     ->label(__('filament-paypal::messages.orders.paypal_order_id'))

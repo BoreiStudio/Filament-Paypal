@@ -6,7 +6,11 @@ use BoreiStudio\FilamentPayPal\Contracts\CredentialResolverInterface;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use PaypalServerSdkLib\Authentication\ClientCredentialsAuthCredentialsBuilder;
+use PaypalServerSdkLib\Controllers\OrdersController;
+use PaypalServerSdkLib\Controllers\PaymentsController;
+use PaypalServerSdkLib\Controllers\SubscriptionsController;
 use PaypalServerSdkLib\Environment;
+use PaypalServerSdkLib\PaypalServerSdkClient;
 use PaypalServerSdkLib\PaypalServerSdkClientBuilder;
 
 class PayPalClient
@@ -26,7 +30,7 @@ class PayPalClient
             : 'https://api-m.paypal.com';
     }
 
-    public function getSdkClient(): \PaypalServerSdkLib\PaypalServerSdkClient
+    public function getSdkClient(): PaypalServerSdkClient
     {
         $credentials = $this->credentialResolver->resolve();
 
@@ -41,17 +45,17 @@ class PayPalClient
             ->build();
     }
 
-    public function getOrdersController(): \PaypalServerSdkLib\Controllers\OrdersController
+    public function getOrdersController(): OrdersController
     {
         return $this->getSdkClient()->getOrdersController();
     }
 
-    public function getPaymentsController(): \PaypalServerSdkLib\Controllers\PaymentsController
+    public function getPaymentsController(): PaymentsController
     {
         return $this->getSdkClient()->getPaymentsController();
     }
 
-    public function getSubscriptionsController(): \PaypalServerSdkLib\Controllers\SubscriptionsController
+    public function getSubscriptionsController(): SubscriptionsController
     {
         return $this->getSdkClient()->getSubscriptionsController();
     }
@@ -104,13 +108,13 @@ class PayPalClient
 
             if (isset($body['details']) && is_array($body['details'])) {
                 foreach ($body['details'] as $detail) {
-                    $details .= ($detail['field'] ?? '') . ': ' . ($detail['issue'] ?? '') . '; ';
+                    $details .= ($detail['field'] ?? '').': '.($detail['issue'] ?? '').'; ';
                 }
             }
 
             $message = $body['message'] ?? 'Unknown error';
             if ($details) {
-                $message .= ' (' . $details . ')';
+                $message .= ' ('.$details.')';
             }
 
             throw new \RuntimeException("PayPal Payouts API error: {$message}");

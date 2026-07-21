@@ -6,13 +6,14 @@ use BoreiStudio\FilamentPayPal\Features\Payouts\Enums\PayoutStatus;
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int $account_id
  * @property string|null $paypal_batch_id
  * @property string $payout_type
- * @property \BoreiStudio\FilamentPayPal\Features\Payouts\Enums\PayoutStatus $status
+ * @property PayoutStatus $status
  * @property float $amount
  * @property string $currency_code
  * @property string $recipient_type
@@ -24,8 +25,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property array|null $items
  * @property array|null $paypal_response
  * @property \DateTime|null $completed_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class Payout extends Model
 {

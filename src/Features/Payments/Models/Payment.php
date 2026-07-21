@@ -4,17 +4,19 @@ namespace BoreiStudio\FilamentPayPal\Features\Payments\Models;
 
 use BoreiStudio\FilamentPayPal\Features\Orders\Models\Order;
 use BoreiStudio\FilamentPayPal\Features\Payments\Enums\PaymentStatus;
+use BoreiStudio\FilamentPayPal\Features\Refunds\Models\Refund;
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int $account_id
  * @property int|null $order_id
  * @property string $paypal_capture_id
- * @property \BoreiStudio\FilamentPayPal\Features\Payments\Enums\PaymentStatus $status
+ * @property PaymentStatus $status
  * @property string|null $status_detail
  * @property float $amount
  * @property string $currency_code
@@ -25,8 +27,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $source
  * @property array|null $paypal_response
  * @property \DateTime|null $captured_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class Payment extends Model
 {
@@ -68,7 +70,7 @@ class Payment extends Model
 
     public function refunds(): HasMany
     {
-        return $this->hasMany(\BoreiStudio\FilamentPayPal\Features\Refunds\Models\Refund::class, 'payment_id');
+        return $this->hasMany(Refund::class, 'payment_id');
     }
 
     public function isCompleted(): bool

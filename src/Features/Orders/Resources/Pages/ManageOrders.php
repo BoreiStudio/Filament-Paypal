@@ -5,6 +5,7 @@ namespace BoreiStudio\FilamentPayPal\Features\Orders\Resources\Pages;
 use BoreiStudio\FilamentPayPal\Features\Orders\Actions\CaptureOrderAction;
 use BoreiStudio\FilamentPayPal\Features\Orders\Actions\CreateOrderAction;
 use BoreiStudio\FilamentPayPal\Features\Orders\Actions\SyncOrderFromApiAction;
+use BoreiStudio\FilamentPayPal\Features\Orders\Enums\OrderStatus;
 use BoreiStudio\FilamentPayPal\Features\Orders\Resources\OrderResource;
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use Filament\Actions\Action;
@@ -55,7 +56,7 @@ class ManageOrders extends ManageRecords
             ])
             ->filters([
                 SelectFilter::make('status')
-                    ->options(fn () => \BoreiStudio\FilamentPayPal\Features\Orders\Enums\OrderStatus::class)
+                    ->options(fn () => OrderStatus::class)
                     ->native(false),
             ])
             ->recordActions([
@@ -63,11 +64,11 @@ class ManageOrders extends ManageRecords
                     Action::make('view')
                         ->icon(Heroicon::Eye)
                         ->slideOver()
-                        ->modalHeading(fn ($record) => __('filament-paypal::messages.orders.details') . ' - ' . $record->paypal_order_id)
+                        ->modalHeading(fn ($record) => __('filament-paypal::messages.orders.details').' - '.$record->paypal_order_id)
                         ->fillForm(fn ($record) => [
                             'paypal_order_id' => $record->paypal_order_id,
                             'status' => $record->status->getLabel(),
-                            'amount' => number_format($record->amount, 2) . ' ' . $record->currency_code,
+                            'amount' => number_format($record->amount, 2).' '.$record->currency_code,
                             'intent' => $record->intent,
                             'payer_email' => $record->payer_email,
                             'payer_name' => $record->payer_name,
@@ -139,7 +140,7 @@ class ManageOrders extends ManageRecords
                         ->icon(Heroicon::Clipboard)
                         ->color('gray')
                         ->visible(fn ($record) => ! empty($record->getApprovalUrl()))
-                        ->alpineClickHandler(fn ($record) => 'navigator.clipboard.writeText(\'' . addslashes($record->getApprovalUrl()) . '\')')
+                        ->alpineClickHandler(fn ($record) => 'navigator.clipboard.writeText(\''.addslashes($record->getApprovalUrl()).'\')')
                         ->action(function ($record) {
                             Notification::make()->success()->title(__('filament-paypal::messages.orders.link_copied'))->send();
                         }),

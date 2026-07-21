@@ -43,7 +43,7 @@ it('payout status colors', function () {
     foreach ($colors as $status => $expected) {
         $payout = Payout::create([
             'account_id' => $account->id,
-            'paypal_batch_id' => 'BATCH-' . $status,
+            'paypal_batch_id' => 'BATCH-'.$status,
             'status' => $status,
             'amount' => 10.00,
             'currency_code' => 'USD',

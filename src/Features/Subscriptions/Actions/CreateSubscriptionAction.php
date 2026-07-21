@@ -45,7 +45,7 @@ class CreateSubscriptionAction
         $result = $response->json();
 
         throw_if(empty($result['id']), new \RuntimeException(
-            'PayPal API returned unexpected response: ' . json_encode($result)
+            'PayPal API returned unexpected response: '.json_encode($result)
         ));
 
         $approvalUrl = null;
@@ -62,7 +62,7 @@ class CreateSubscriptionAction
             'paypal_subscription_id' => $result['id'],
             'status' => $result['status'] ?? 'APPROVAL_PENDING',
             'subscriber_email' => $data['email_address'] ?? null,
-            'subscriber_name' => ($data['given_name'] ?? '') . ' ' . ($data['surname'] ?? ''),
+            'subscriber_name' => ($data['given_name'] ?? '').' '.($data['surname'] ?? ''),
             'start_time' => $data['start_time'] ?? null,
             'approval_url' => $approvalUrl,
             'paypal_response' => $result,

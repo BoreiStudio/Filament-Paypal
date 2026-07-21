@@ -6,13 +6,14 @@ use BoreiStudio\FilamentPayPal\Features\Subscriptions\Enums\SubscriptionStatus;
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int $account_id
  * @property int|null $plan_id
  * @property string $paypal_subscription_id
- * @property \BoreiStudio\FilamentPayPal\Features\Subscriptions\Enums\SubscriptionStatus $status
+ * @property SubscriptionStatus $status
  * @property string|null $subscriber_email
  * @property string|null $subscriber_name
  * @property \DateTime|null $start_time
@@ -22,8 +23,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $failed_payments_count
  * @property array|null $paypal_response
  * @property string|null $approval_url
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class Subscription extends Model
 {

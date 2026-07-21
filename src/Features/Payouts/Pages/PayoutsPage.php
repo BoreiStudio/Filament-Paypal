@@ -4,6 +4,7 @@ namespace BoreiStudio\FilamentPayPal\Features\Payouts\Pages;
 
 use BoreiStudio\FilamentPayPal\Clusters\PayPalCluster;
 use BoreiStudio\FilamentPayPal\Features\Payouts\Actions\CreatePayoutAction;
+use BoreiStudio\FilamentPayPal\Features\Payouts\Models\Payout;
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
@@ -24,7 +25,7 @@ class PayoutsPage extends Page implements HasTable
 
     protected static ?string $cluster = PayPalCluster::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::Banknotes;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::Banknotes;
 
     protected static ?int $navigationSort = 7;
 
@@ -39,7 +40,7 @@ class PayoutsPage extends Page implements HasTable
     {
         return $table
             ->defaultSort('created_at', 'desc')
-            ->query(\BoreiStudio\FilamentPayPal\Features\Payouts\Models\Payout::query())
+            ->query(Payout::query())
             ->columns([
                 TextColumn::make('paypal_batch_id')
                     ->label(__('filament-paypal::messages.payouts.batch_id'))
@@ -87,7 +88,7 @@ class PayoutsPage extends Page implements HasTable
                     ->fillForm(fn ($record) => [
                         'paypal_batch_id' => $record->paypal_batch_id,
                         'status' => $record->status->getLabel(),
-                        'amount' => number_format($record->amount, 2) . ' ' . $record->currency_code,
+                        'amount' => number_format($record->amount, 2).' '.$record->currency_code,
                         'recipient_type' => $record->recipient_type,
                         'recipient_value' => $record->recipient_value,
                         'recipient_name' => $record->recipient_name,
@@ -169,6 +170,7 @@ class PayoutsPage extends Page implements HasTable
                     ->action(function (array $data) {
                         if ($data['recipient_type'] === 'EMAIL' && ! filter_var($data['recipient_value'], FILTER_VALIDATE_EMAIL)) {
                             Notification::make()->danger()->title(__('filament-paypal::messages.payouts.error'))->body(__('filament-paypal::messages.payouts.invalid_email'))->send();
+
                             return;
                         }
                         try {

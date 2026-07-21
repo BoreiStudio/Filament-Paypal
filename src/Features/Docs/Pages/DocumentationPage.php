@@ -7,6 +7,7 @@ use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use Filament\Facades\Filament;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Str;
 
@@ -68,7 +69,7 @@ class DocumentationPage extends Page
     public function loadContent(): void
     {
         $modules = $this->getModules();
-        $path = __DIR__ . '/../../../../docs/' . $this->selectedModule . '/index.md';
+        $path = __DIR__.'/../../../../docs/'.$this->selectedModule.'/index.md';
 
         if (! isset($modules[$this->selectedModule]) || ! file_exists($path)) {
             $this->content = '<p class="text-gray-400">Document not found.</p>';
@@ -84,13 +85,13 @@ class DocumentationPage extends Page
 
     public function copyMarkdown(): void
     {
-        $path = __DIR__ . '/../../../../docs/' . $this->selectedModule . '/index.md';
+        $path = __DIR__.'/../../../../docs/'.$this->selectedModule.'/index.md';
 
         if (! file_exists($path)) {
             return;
         }
 
-        $this->js('navigator.clipboard.writeText(' . json_encode(file_get_contents($path)) . ')');
+        $this->js('navigator.clipboard.writeText('.json_encode(file_get_contents($path)).')');
 
         Notification::make()
             ->title('Markdown copied to clipboard.')
@@ -120,7 +121,7 @@ class DocumentationPage extends Page
         ];
     }
 
-    public function getTitle(): string | Htmlable
+    public function getTitle(): string|Htmlable
     {
         return 'Documentation';
     }
@@ -130,8 +131,8 @@ class DocumentationPage extends Page
         return 'Documentation';
     }
 
-    public static function getNavigationIcon(): string | \BackedEnum | null
+    public static function getNavigationIcon(): string|\BackedEnum|null
     {
-        return \Filament\Support\Icons\Heroicon::BookOpen;
+        return Heroicon::BookOpen;
     }
 }

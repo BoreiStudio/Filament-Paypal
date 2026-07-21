@@ -2,7 +2,6 @@
 
 namespace BoreiStudio\FilamentPayPal\Console\Commands;
 
-use BoreiStudio\FilamentPayPal\Features\Webhooks\Support\WebhookSignatureVerifier;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -22,7 +21,7 @@ class WebhookSimulateCommand extends Command
         $targetUrl = $this->option('url') ?? url('/paypal/webhooks');
 
         $payload = [
-            'id' => 'WH-' . strtoupper(uniqid()),
+            'id' => 'WH-'.strtoupper(uniqid()),
             'event_type' => $eventType,
             'resource_type' => 'capture',
             'resource' => [
@@ -39,7 +38,7 @@ class WebhookSimulateCommand extends Command
 
         $this->info("Sending webhook event: {$eventType}");
         $this->line("Target URL: {$targetUrl}");
-        $this->line("Payload: " . json_encode($payload, JSON_PRETTY_PRINT));
+        $this->line('Payload: '.json_encode($payload, JSON_PRETTY_PRINT));
 
         $response = Http::withHeaders([
             'PAYPAL-AUTH-ALGO' => 'SHA256withRSA',

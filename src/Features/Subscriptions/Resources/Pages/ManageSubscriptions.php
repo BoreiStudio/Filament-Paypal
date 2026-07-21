@@ -7,27 +7,29 @@ use BoreiStudio\FilamentPayPal\Features\Subscriptions\Actions\CreateSubscription
 use BoreiStudio\FilamentPayPal\Features\Subscriptions\Models\Plan;
 use BoreiStudio\FilamentPayPal\Features\Subscriptions\Resources\SubscriptionResource;
 use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ManageRecords;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
 
 class ManageSubscriptions extends ManageRecords
 {
     protected static string $resource = SubscriptionResource::class;
 
-    public function table(\Filament\Tables\Table $table): \Filament\Tables\Table
+    public function table(Table $table): Table
     {
         return $table
             ->recordActions([
-                \Filament\Actions\ActionGroup::make([
+                ActionGroup::make([
                     Action::make('copy_approval_link')
                         ->label(__('filament-paypal::messages.subscriptions.copy_approval_link'))
                         ->icon(Heroicon::Link)
                         ->color('info')
                         ->visible(fn ($record) => $record->isApprovalPending() && $record->getApprovalUrl())
-                        ->alpineClickHandler(fn ($record) => 'navigator.clipboard.writeText(\'' . addslashes($record->getApprovalUrl()) . '\')')
+                        ->alpineClickHandler(fn ($record) => 'navigator.clipboard.writeText(\''.addslashes($record->getApprovalUrl()).'\')')
                         ->action(function ($record) {
                             Notification::make()->success()->title(__('filament-paypal::messages.subscriptions.link_copied'))->send();
                         }),
@@ -53,7 +55,7 @@ class ManageSubscriptions extends ManageRecords
                             ->label(__('filament-paypal::messages.subscriptions.plan'))
                             ->options(
                                 Plan::with('product')->get()->mapWithKeys(fn ($plan) => [
-                                    $plan->id => $plan->name . ' (' . $plan->product->name . ') - ' . $plan->amount . ' ' . $plan->currency_code . ' / ' . $plan->billing_frequency,
+                                    $plan->id => $plan->name.' ('.$plan->product->name.') - '.$plan->amount.' '.$plan->currency_code.' / '.$plan->billing_frequency,
                                 ])
                             )
                             ->required()

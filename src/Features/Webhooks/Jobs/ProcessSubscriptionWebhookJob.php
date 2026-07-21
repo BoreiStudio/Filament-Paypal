@@ -50,7 +50,7 @@ class ProcessSubscriptionWebhookJob implements ShouldQueue
                             'status' => $localStatus,
                             'subscriber_email' => $resource['subscriber']['email_address'] ?? null,
                             'subscriber_name' => isset($resource['subscriber']['name'])
-                                ? ($resource['subscriber']['name']['given_name'] ?? '') . ' ' . ($resource['subscriber']['name']['surname'] ?? '')
+                                ? ($resource['subscriber']['name']['given_name'] ?? '').' '.($resource['subscriber']['name']['surname'] ?? '')
                                 : null,
                             'start_time' => $resource['start_time'] ?? null,
                             'next_billing_time' => $resource['billing_info']['next_billing_time'] ?? null,

@@ -2,6 +2,7 @@
 
 namespace BoreiStudio\FilamentPayPal\Concerns;
 
+use BoreiStudio\FilamentPayPal\Clusters\PayPalCluster;
 use BoreiStudio\FilamentPayPal\Features\Dashboard\Widgets\PayPalStatsWidget;
 use BoreiStudio\FilamentPayPal\Features\Docs\Pages\DocumentationPage;
 use BoreiStudio\FilamentPayPal\Features\Orders\Resources\OrderResource;
@@ -165,7 +166,7 @@ trait HasFeatureToggles
 
         $group = $this->getNavigationGroup();
         if ($group) {
-            \BoreiStudio\FilamentPayPal\Clusters\PayPalCluster::setNavigationGroup($group);
+            PayPalCluster::setNavigationGroup($group);
         }
 
         if ($role = $this->getSettingsRole()) {
@@ -207,7 +208,7 @@ trait HasFeatureToggles
 
         $panel
             ->discoverClusters(
-                in: __DIR__ . '/../Clusters',
+                in: __DIR__.'/../Clusters',
                 for: 'BoreiStudio\\FilamentPayPal\\Clusters',
             )
             ->resources($resources)

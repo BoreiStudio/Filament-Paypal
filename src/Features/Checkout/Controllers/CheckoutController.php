@@ -4,6 +4,7 @@ namespace BoreiStudio\FilamentPayPal\Features\Checkout\Controllers;
 
 use BoreiStudio\FilamentPayPal\Features\Orders\Actions\CaptureOrderAction;
 use BoreiStudio\FilamentPayPal\Features\Orders\Actions\CreateOrderAction;
+use BoreiStudio\FilamentPayPal\Features\Orders\Models\Order;
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -52,7 +53,7 @@ class CheckoutController extends Controller
             return view('filament-paypal::checkout.result', ['success' => false, 'message' => __('filament-paypal::messages.checkout.no_token')]);
         }
 
-        $order = \BoreiStudio\FilamentPayPal\Features\Orders\Models\Order::where('paypal_order_id', $token)->first();
+        $order = Order::where('paypal_order_id', $token)->first();
 
         if (! $order) {
             return view('filament-paypal::checkout.result', ['success' => false, 'message' => __('filament-paypal::messages.checkout.order_not_found')]);
@@ -69,7 +70,7 @@ class CheckoutController extends Controller
         } catch (\Throwable $e) {
             return view('filament-paypal::checkout.result', [
                 'success' => false,
-                'message' => __('filament-paypal::messages.checkout.capture_failed') . ' ' . $e->getMessage(),
+                'message' => __('filament-paypal::messages.checkout.capture_failed').' '.$e->getMessage(),
             ]);
         }
     }

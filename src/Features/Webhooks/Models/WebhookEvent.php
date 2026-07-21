@@ -6,6 +6,7 @@ use BoreiStudio\FilamentPayPal\Features\Webhooks\Enums\WebhookEventStatus;
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -16,12 +17,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $resource_id
  * @property string|null $summary
  * @property bool|null $signature_valid
- * @property \BoreiStudio\FilamentPayPal\Features\Webhooks\Enums\WebhookEventStatus $status
+ * @property WebhookEventStatus $status
  * @property string|null $error
  * @property array $raw_payload
  * @property \DateTime|null $processed_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class WebhookEvent extends Model
 {

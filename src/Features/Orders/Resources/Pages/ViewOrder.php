@@ -76,7 +76,7 @@ class ViewOrder extends ViewRecord
                 ->icon('heroicon-o-clipboard')
                 ->color('gray')
                 ->visible(fn ($record) => ! empty($record->getApprovalUrl()))
-                ->alpineClickHandler(fn ($record) => 'navigator.clipboard.writeText(\'' . addslashes($record->getApprovalUrl()) . '\')')
+                ->alpineClickHandler(fn ($record) => 'navigator.clipboard.writeText(\''.addslashes($record->getApprovalUrl()).'\')')
                 ->action(function ($record) {
                     Notification::make()
                         ->title(__('filament-paypal::messages.orders.link_copied'))

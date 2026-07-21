@@ -3,6 +3,8 @@
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use BoreiStudio\FilamentPayPal\Support\Credentials\PayPalAccountNotConnectedException;
 use BoreiStudio\FilamentPayPal\Support\Credentials\SingleTenantCredentialResolver;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 it('can create a paypal account', function () {
     $account = PaypalAccount::create([
@@ -17,7 +19,7 @@ it('can create a paypal account', function () {
 });
 
 it('can scope by tenant', function () {
-    $tenant = new class extends \Illuminate\Database\Eloquent\Model
+    $tenant = new class extends Model
     {
         protected $table = 'tenants';
     };
@@ -93,7 +95,7 @@ it('paypal account has correct casts', function () {
     ]);
 
     expect($account->sandbox_mode)->toBeTrue()
-        ->and($account->last_verified_at)->toBeInstanceOf(\Illuminate\Support\Carbon::class);
+        ->and($account->last_verified_at)->toBeInstanceOf(Carbon::class);
 });
 
 it('getActiveClientId returns sandbox credentials in sandbox mode', function () {

@@ -10,9 +10,9 @@ use Filament\Support\Icons\Heroicon;
 
 class PayPalConfigCluster extends Cluster
 {
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::Cog6Tooth;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::Cog6Tooth;
 
-    protected static string | \UnitEnum | null $navigationGroup = 'Settings';
+    protected static string|\UnitEnum|null $navigationGroup = 'Settings';
 
     public static function getNavigationLabel(): string
     {
@@ -34,7 +34,7 @@ class PayPalConfigCluster extends Cluster
         return '✓';
     }
 
-    public static function setNavigationGroup(string | \UnitEnum | null $group): void
+    public static function setNavigationGroup(string|\UnitEnum|null $group): void
     {
         static::$navigationGroup = $group;
     }

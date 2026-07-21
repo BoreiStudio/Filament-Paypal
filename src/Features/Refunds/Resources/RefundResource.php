@@ -17,7 +17,7 @@ class RefundResource extends Resource
 
     protected static ?string $slug = 'refunds';
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::ArrowUturnLeft;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::ArrowUturnLeft;
 
     protected static ?int $navigationSort = 3;
 

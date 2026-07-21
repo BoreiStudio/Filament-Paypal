@@ -22,7 +22,7 @@ class SubscriptionResource extends Resource
 
     protected static ?string $slug = 'subscriptions';
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::ArrowPath;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::ArrowPath;
 
     protected static ?int $navigationSort = 6;
 

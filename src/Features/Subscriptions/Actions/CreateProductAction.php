@@ -28,7 +28,7 @@ class CreateProductAction
         $result = $response->json();
 
         throw_if(empty($result['id']), new \RuntimeException(
-            'PayPal API returned unexpected response: ' . json_encode($result)
+            'PayPal API returned unexpected response: '.json_encode($result)
         ));
 
         return Product::create([

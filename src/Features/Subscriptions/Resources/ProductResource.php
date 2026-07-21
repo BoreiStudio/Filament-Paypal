@@ -28,7 +28,7 @@ class ProductResource extends Resource
 
     protected static ?string $slug = 'subscription-products';
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::Cube;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::Cube;
 
     protected static ?int $navigationSort = 4;
 

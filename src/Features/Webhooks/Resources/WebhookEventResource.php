@@ -18,7 +18,7 @@ class WebhookEventResource extends Resource
 
     protected static ?string $slug = 'webhook-events';
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::ArrowPathRoundedSquare;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::ArrowPathRoundedSquare;
 
     protected static ?int $navigationSort = 6;
 

@@ -28,7 +28,7 @@ class PlanResource extends Resource
 
     protected static ?string $slug = 'subscription-plans';
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::DocumentText;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::DocumentText;
 
     protected static ?int $navigationSort = 5;
 

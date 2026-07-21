@@ -7,6 +7,7 @@ use BoreiStudio\FilamentPayPal\Features\Refunds\Enums\RefundStatus;
 use BoreiStudio\FilamentPayPal\Models\PaypalAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -14,13 +15,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $payment_id
  * @property string $paypal_refund_id
  * @property float $amount
- * @property \BoreiStudio\FilamentPayPal\Features\Refunds\Enums\RefundStatus $status
+ * @property RefundStatus $status
  * @property string|null $status_detail
  * @property string|null $invoice_id
  * @property string|null $note_to_payer
  * @property array|null $paypal_response
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
 class Refund extends Model
 {

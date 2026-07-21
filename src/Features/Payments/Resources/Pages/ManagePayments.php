@@ -73,14 +73,14 @@ class ManagePayments extends ManageRecords
                         ->fillForm(fn ($record) => [
                             'paypal_capture_id' => $record->paypal_capture_id,
                             'status' => $record->status->getLabel(),
-                            'amount' => number_format($record->amount, 2) . ' ' . $record->currency_code,
+                            'amount' => number_format($record->amount, 2).' '.$record->currency_code,
                             'payment_method' => $record->payment_method,
                             'payer_email' => $record->payer_email,
                             'external_reference' => $record->external_reference,
                             'captured_at' => $record->captured_at?->format('M d, Y H:i:s'),
                             'order_id' => $record->order?->paypal_order_id,
-                            'refunded' => number_format($record->getRefundedAmount(), 2) . ' ' . $record->currency_code,
-                            'available' => number_format($record->getAvailableForRefund(), 2) . ' ' . $record->currency_code,
+                            'refunded' => number_format($record->getRefundedAmount(), 2).' '.$record->currency_code,
+                            'available' => number_format($record->getAvailableForRefund(), 2).' '.$record->currency_code,
                         ])
                         ->schema([
                             Section::make('Payment')
