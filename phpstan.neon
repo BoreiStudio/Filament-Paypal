@@ -1,0 +1,17 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - src
+
+    level: 5
+
+    ignoreErrors:
+        - '#Parameter \#1 \$view of function view expects view-string\|null, string given#'
+        - '#Access to an undefined property.*PayPalSettingsPage::\$form#'
+        - '#Method.*never returns array<string> so it can be removed from the return type#'
+        - '#Method.*never returns null so it can be removed from the return type#'
+        - '#Using nullsafe property access "\?->[a-z_]+" on left side of \?\? is unnecessary\. Use -> instead#'
+        - '#Call to an undefined method Filament\\Infolists\\Components\\TextEntry::monospace\(\)#'
+        - '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$name#'

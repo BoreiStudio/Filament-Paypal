@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.3, 8.4]
+
+    steps:
+      - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@b604ade2a87db23f8871b7182e69ec5e75effb45 # v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, dom, fileinfo, pdo, sqlite
+          coverage: none
+
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction
+
+      - name: Pint
+        run: vendor/bin/pint --test
+
+  analyse:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.3, 8.4]
+        laravel: [12, 13]
+
+    steps:
+      - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@b604ade2a87db23f8871b7182e69ec5e75effb45 # v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, dom, fileinfo, pdo, sqlite
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:^${{ matrix.laravel }}.0" --no-interaction --no-update
+          composer update --prefer-dist --no-interaction
+
+      - name: PHPStan
+        run: vendor/bin/phpstan analyse --error-format=github
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.3, 8.4]
+        laravel: [12, 13]
+
+    steps:
+      - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@b604ade2a87db23f8871b7182e69ec5e75effb45 # v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, dom, fileinfo, pdo, sqlite
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:^${{ matrix.laravel }}.0" --no-interaction --no-update
+          composer update --prefer-dist --no-interaction
+
+      - name: Pest
+        run: vendor/bin/pest --compact
