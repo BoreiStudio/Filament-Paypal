@@ -3,9 +3,10 @@ updates:
   - package-ecosystem: "composer"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
       day: "monday"
-    open-pull-requests-limit: 10
+      time: "09:00"
+    open-pull-requests-limit: 5
     labels:
       - "dependencies"
     groups:
@@ -25,8 +26,9 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
       day: "monday"
-    open-pull-requests-limit: 5
+      time: "09:00"
+    open-pull-requests-limit: 3
     labels:
       - "dependencies"
